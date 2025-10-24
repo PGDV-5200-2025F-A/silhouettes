@@ -1,0 +1,46 @@
+<html>
+  <head>
+    <style>
+      .img-component {
+        display: inline;
+        position: relative;
+        cursor: pointer;
+      }
+
+      .outline-overlay {
+        position: absolute;
+        left: 0;
+        opacity: 0;
+      }
+
+      .outline-overlay.show {
+        opacity: 1;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="img-component">
+      <img class="original-image" src="../imgs/00_original/00097.jpg" height="300px">
+      <img class="outline-overlay" src="../imgs/04_silhouetted/00097.png" height="300px">
+    </div>
+    
+    <div class="img-component">
+      <img class="original-image" src="../imgs/00_original/01346.jpg" height="300px">
+      <img class="outline-overlay" src="../imgs/04_silhouetted/01346.png" height="300px">
+    </div>
+
+    <div class="img-component">
+      <img class="original-image" src="../imgs/00_original/02531.jpg" height="300px">
+      <img class="outline-overlay" src="../imgs/04_silhouetted/02531.png" height="300px">
+    </div>
+  </body>
+</html>
+
+<script>
+    const overlays = document.getElementsByClassName("outline-overlay");
+    Array.from(overlays).forEach(el => {
+      el.addEventListener("mouseover", () => el.classList.add("show"));
+      el.addEventListener("mouseleave", () => el.classList.remove("show"));
+    });
+</script>
