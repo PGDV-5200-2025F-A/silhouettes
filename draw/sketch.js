@@ -6,7 +6,7 @@ const imgUrl =
 
 let silData = [];
 
-let img;
+let img = null;
 let points = [];
 
 async function loadData() {
@@ -54,40 +54,44 @@ function getSilhouette(rowData) {
 let pidx = 0;
 let sFactor = 1;
 
-function setImageSources() {
-  Array.from(document.getElementsByClassName("original-image")).forEach(
-    (el) => {
-      el.src = `${imgUrl}/${el.dataset.filename}.jpg`;
+function setupImages() {
+  const allImageEls = document.getElementsByClassName("original-image");
 
-      el.addEventListener("click", async (evt) => {
-        const imgBB = evt.target.getBoundingClientRect();
-        clear();
-        resizeCanvas(imgBB.width, imgBB.height);
+  // Add image source using its dataset.filename attribute
+  Array.from(allImageEls).forEach((el) => {
+    el.src = `${imgUrl}/${el.dataset.filename}.jpg`;
+  });
 
-        await loadByFilename(evt.target.dataset.filename);
+  // Add click event to images
+  Array.from(allImageEls).forEach((el) => {
+    el.addEventListener("click", async (evt) => {
+      const imgBB = evt.target.getBoundingClientRect();
+      clear();
+      resizeCanvas(imgBB.width, imgBB.height);
 
-        const canvasContainerEl = document.getElementById("canvas-container");
-        canvasContainerEl.style.top = `${imgBB.top}px`;
-        canvasContainerEl.style.left = `${imgBB.left}px`;
+      await loadByFilename(evt.target.dataset.filename);
 
-        sFactor = imgBB.height / img.height;
-        pidx = 0;
-        clear();
-      });
-    }
-  );
+      const canvasContainerEl = document.getElementById("canvas-container");
+      canvasContainerEl.style.top = `${imgBB.top}px`;
+      canvasContainerEl.style.left = `${imgBB.left}px`;
+
+      sFactor = imgBB.height / img.height;
+      pidx = 0;
+      clear();
+    });
+  });
 }
 
 async function setup() {
   let mCanvas = createCanvas(0, 0);
   mCanvas.parent("canvas-container");
 
-  setImageSources();
-  await loadData();
+  loadData();
+  setupImages();
 }
 
 function draw() {
-  fill(255, 0, 0);
+  fill(220, 0, 0);
   noStroke();
 
   for (let i = 0; i < pidx; i++) {
