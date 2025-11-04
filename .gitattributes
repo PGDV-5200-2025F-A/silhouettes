@@ -4,3 +4,5 @@ csv/revolutionary_silhouettes-sized.csv filter=lfs diff=lfs merge=lfs -text
 json/revolutionary_silhouettes-original.json filter=lfs diff=lfs merge=lfs -text
 json/revolutionary_silhouettes-sized.json filter=lfs diff=lfs merge=lfs -text
 json/revolutionary_silhouettes-cropped.json filter=lfs diff=lfs merge=lfs -text
+csv/revolutionary_silhouettes-centered.csv filter=lfs diff=lfs merge=lfs -text
+json/revolutionary_silhouettes-centered.json filter=lfs diff=lfs merge=lfs -text
